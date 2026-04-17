@@ -9,7 +9,9 @@ pipeline {
     DOCKER_CREDS = "DockerHubAccess"
     TF_DIR = "/home/ubuntu/workspace/cd-infrasetup_develop" 
   }
-
+parameters {
+        choice(name: 'Docker_Build', choices: ['no', 'yes'], description: 'Select an option')
+}
   stages {
     stage('Checkout Code') {
       steps {
@@ -22,12 +24,18 @@ pipeline {
       }
     }
     stage('Build Docker Image') {
+      when {
+         expression { params.Docker_Build == 'yes' }
+      }
       steps {
         sh "docker build -t $IMAGE_NAME:$TAG ."
       }
     }
 
     stage('Docker Login') {
+      when {
+         expression { params.Docker_Build == 'yes' }
+      }
       steps {
         withCredentials([usernamePassword(
           credentialsId: "${DOCKER_CREDS}",
@@ -40,6 +48,9 @@ pipeline {
     }
 
     stage('Push Image') {
+      when {
+         expression { params.Docker_Build == 'yes' }
+      }
       steps {
         sh "docker push $IMAGE_NAME:$TAG"
       }
