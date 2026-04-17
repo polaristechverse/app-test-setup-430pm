@@ -4,9 +4,9 @@ pipeline {
   }
 
   environment {
-    IMAGE_NAME = "chaitanyamanikumar/test"
+    IMAGE_NAME = "chaitanyamanikumar/javaslim"
     TAG = "${BUILD_NUMBER}"
-    DOCKER_CREDS = "DOCKER_CREDS"
+    DOCKER_CREDS = "DockerHubAccess"
     TF_DIR = "/home/ubuntu/workspace/cd-infrasetup_develop" 
   }
 
