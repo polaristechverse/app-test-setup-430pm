@@ -60,6 +60,7 @@ pipeline {
                       string(name: 'REGION', value: 'ap-south-2'),
                       string(name: 'TERRAFORM_APPLY', value: 'yes'),
                       string(name: 'Ansible_Build', value: 'yes')
+                      string(name: 'Pull_AMI', value: 'yes')
                     ]
 
               echo "Infra pipeline completed"
