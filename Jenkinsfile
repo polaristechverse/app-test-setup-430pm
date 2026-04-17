@@ -62,7 +62,7 @@ parameters {
 
             def status = sh(script: "terraform state list", returnStatus: true)
 
-            if (!output) {
+            if (!status) {
               echo "Infra not found → triggering infra pipeline..."
 
               build job: 'cd-infrasetup/develop',
